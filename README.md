@@ -2,9 +2,22 @@
 # 602377101 강승희
 <h2> 2023-03-23 </h2>
 
-# R 패키지 설치
-
+# R 패키지
 - R에서의 패키지 -> 라이브러리와 같은 개념
+
+### [1] 패키지 설치하기
+- R 스튜디오 Console 창에 install.packages("ggplot2") 입력
+- Packages -> Install -> cowsay 입력 후 install 클릭
+
+### [2] 패키지 불러오기
+
+- Console 창에 library(ggplot2) 입력
+- Console 창에 library(cowsay) 입력
+
+# 변수
+- 개념 : 프로그램 내에서 어떤 값을 저장해 놓을 수 있는 '보관상자'의 역할
+-  변수 만들기  
+a <- 10 : a라는 변수에 10이라는 값을 저장 명령문
 ---
 <h2> 2023-03-16 </h2>
 
@@ -69,8 +82,28 @@ ex) log(), max(), min() 등
 - 개념 : 함수들을 기능별로 묶어놓은 일종의 '꾸러미'
 
 ---
-### 2023-03-09
+<h2> 2023-03-09 </h2>
 
+# Git 사용자 설정
+<h3>cmd 창에 다음과 같이 입력</h3>
 
+- $ git config --global user.name “foo”  
+- $ git config --global user.email “foo@example.com”  
+
+# Git 초기화
+- source control > Initialize Repository 버튼을 클릭
+- 폴더에는 .git 이라는 숨긴 폴더가 생성
+
+# Git commit하기
+- Message 작성
+- 아래 쪽의 ‘✔commit’ 버튼 클릭
+
+# Git push하기
+-  commit 버튼이 ‘Publish Branch’로 바뀜
+- private인지 public인지만 선택
+
+# R 언어
+- 비교적 최근에 개발된 언어
+- 통계계산과 그래픽을 위한 프로그래밍 언어
 
 ---
