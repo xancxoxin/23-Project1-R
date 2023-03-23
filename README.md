@@ -31,7 +31,7 @@
 ### - 자료형 : 변수에 저장할 수 있는 값의 종류
 ### (1) 숫자형 
 - 자연수를 포함하여 양의 정수, 음의 정수, 0, 실수 등의 값으로, 산술연산 가능   
-ex) 1,2,-4  
+ex) 1, 2, -4  
 ### (2) 문자형 
 - 숫자형과는 달리 산술연산을 할 수 없고, 문자형의 값은 반드시 작은 따옴표나 큰따옴표로 묶어 표시해야함 
 ex) 'Tom',"Jane"  
@@ -54,7 +54,7 @@ ex) TRUE, FALSE
 # 백터
 - 백터의 form     
 > score <- c(68, 95, 83, 76, 90, 80, 85, 91, 82, 70)
-> mean(score) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 평균 출력
+> mean(score) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 평균 출력
 <br>
 
 ## [1] 개념
@@ -120,6 +120,12 @@ mon tue wed thu fri
 > foo  
  [1] "1월"  "2월"  "3월"  "4월"  "5월"  "6월"  "7월"  "8월"  "9월"   
 [10] "10월" "11월" "12월"
+
+### * 참고사항
+> foo = 10  
+> fo <- 10
+
+=> 모두 사용 가능
 
 ---
 <h2> 2023-03-16 </h2>
