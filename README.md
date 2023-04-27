@@ -6,7 +6,23 @@
 ## [1] 막대그래프 작성의 기초
 - 막대그래프 : 그래프별로 집계된 데이터를 표현하는 도구
 - 데이터 시각화 : 데이터가 포함하고 있는 정보를 이해하기 쉽게 표현하는 과정
-
+### 1. 도수분표포 그리기
+```
+> favorite <- c('winter', 'summer', 'spring', 'summer','summer','spring','spring', 'fall', 'fall','summer')
+> favorite
+[1] "winter" "summer" "spring" "summer" "summer" "spring" "spring"
+ [8] "fall"   "fall"   "summer"
+> table(favorite)
+favorite
+  fall spring summer winter 
+     2      3      4      1 
+> ds <- table(favorite)
+> ds
+favorite
+  fall spring summer winter 
+     2      3      4      1 
+> barplot(ds, main = 'favorite season')
+```
 ---
 
 <h2> 2023-04-13 </h2>
