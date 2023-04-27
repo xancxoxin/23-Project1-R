@@ -6,23 +6,24 @@
 ## [1] 막대그래프 작성의 기초
 - 막대그래프 : 그래프별로 집계된 데이터를 표현하는 도구
 - 데이터 시각화 : 데이터가 포함하고 있는 정보를 이해하기 쉽게 표현하는 과정
-### 1. 도수분표포 그리기
-```
-> favorite <- c('winter', 'summer', 'spring', 'summer','summer','spring','spring', 'fall', 'fall','summer')
-> favorite
-[1] "winter" "summer" "spring" "summer" "summer" "spring" "spring"
- [8] "fall"   "fall"   "summer"
-> table(favorite)
-favorite
-  fall spring summer winter 
-     2      3      4      1 
-> ds <- table(favorite)
-> ds
-favorite
-  fall spring summer winter 
-     2      3      4      1 
-> barplot(ds, main = 'favorite season')
-```
+
+## [2] 중접 그룹의 막대그래프
+
+## [3] 막대그래프에 범례 추가
+
+# 히스토그램
+- 개념 : 외관상 막대그래프와 비슷한 그래프로, 그룹이 명시적으로 존재하지 않는 수치형 자료의 분포를 시각화할 때 사용함
+- R에서는 hist() 함수를 이용하여 히스토그램을 작성함
+
+## [1] 
+
+# 다중그래프
+# 원그래프
+# 선그래프
+- 연도별 인구 증가 추이와 같이 시간의 변화에 따라 수집된 데이터를 시각화하는데 주로 사용
+- x축을 시간축으로 하여 선그래프를 그리면 시간 변화에 따른 증감 추이를 알 수 있음
+
+9-4전까지
 ---
 
 <h2> 2023-04-13 </h2>
