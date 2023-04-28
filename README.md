@@ -6,7 +6,47 @@
 ## [1] 막대그래프 작성의 기초
 - 막대그래프 : 그래프별로 집계된 데이터를 표현하는 도구
 - 데이터 시각화 : 데이터가 포함하고 있는 정보를 이해하기 쉽게 표현하는 과정
+### 1. 도수분포표 계산하기
+```
+> favorite <- c('WINTER','SUMMER','SPRING','SUMMER','SUMMER','FALL','FALL','SUMMER','SPRING','SPRING')          # 데이터 입력
+> favorite          # favorite의 내용 출력
+> table(favorite)          # 도수분포 계산
+```
+- table() : 벡터에 저장되니 범주형 데이터에 대해 데이터값이 종류별로 몇 개인지 계산하는 함수
 
+### 2. 막대그래프 작성하기
+```
+> ds <- table(favorite)          # 도수분포표 저장
+> ds          # 도수분포표 내용 확인
+> barplot(ds, main='favorite season')          # 막대그래프 작성
+```
+- ds : 그래프로 표현할 도수분포효를 지정한다
+- main = 'favorite seaon' : 막대그래프 상단의 그래프 제목을 지정한다
+- barplot()
+(1) 막대그래프를 작성하는 함수
+(2) 2개의 매개변수 외에도 다양한 매개변수를 가질 수 있음
+(3) 매개변수값에 따라 막대 색상을 다르게 하거나 x축, y축의 레이블을 지정할 수 있음
+
+### 3. 막대그래프 색 지정하기
+```
+> barplot(ds, main='favorite seaon', 
+col='blue')          # 막대의 전채 색 지정
+> barplot(ds, main='favorite seaon', 
+col=c('blue','red','green','yellow'))          # 막대의 색을 각각 지정
+> barplot(ds, main='favorite seaon', 
+col=rainbow(4))          # 레인보우 팔레트에서 4개의 색을 선택
+```
+- col : 막대의 색을 지정하는 매개변수
+- 색을 지정하는 방법
+(1) 'blue', 'red', 'yellow'와 같이 색의 이름을 지정한다
+(2) '#0000FF'와 같이 색상별로 지정된 코드를 이용한다
+(3) rgb(0,0,0,255, maxColorValue=255)와 같이 빨강, 초록, 파랑, 투명도의 조합으로 색을 만들어서 사용한다
+- 팔레트 사용을 위한 함수 : rainbow(), heat.colors(), terrain.colors(), topo.colors(), cm.colors() 대표적
+
+### 4. x축, y축에 설명 붙이기
+```
+> barplot(ds, main='favorite seaon', col='green', xlab='계절', ylab='빈도수')
+```
 ## [2] 중접 그룹의 막대그래프
 
 ## [3] 막대그래프에 범례 추가
