@@ -297,6 +297,8 @@ $out
         args.legend = list(x='topright', bty='n', inset=c(-0.25,0)))
 > par(mfrow=c(1, 1), mar=c(5, 4, 4, 2)+0.1)          # 그래프창 설정 해제
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236196393-d26372e7-cf7f-4798-93ec-68dec102664a.png">
+
 
 # 히스토그램
 - 개념 : 외관상 막대그래프와 비슷한 그래프로, 그룹이 명시적으로 존재하지 않는 수치형 자료의 분포를 시각화할 때 사용함
@@ -317,6 +319,8 @@ $out
        las=2,                            # x축 글씨 방향(0~3)
        breaks=5)                         # 막대 개수 조절
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236196562-dccd9e69-e52f-4961-bf4f-6bd38f631a6e.png">
+
 - border='blue' : 막대의 테두리 색을 지정한다
 - breaks=5 : 데이터 내 구간을 몇 개로 나눌지를 지정하며, 값이 커질수록 막대의 개수도 늘어난다
 
@@ -336,6 +340,8 @@ $out
 > names(freq) <- result$breaks[-1]                 # 구간값을 이름으로 지정
 > freq                                             # 구간별 빈도수 출력
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236196743-d6066eeb-735a-4663-b57d-6e48610ca781.png">
+
 (1) result : 리스트 형대의 자료구조로 되어 있고 여러 값들을 포함하고 있음
 - $breaks : 히스토그램을 작성하기 위한 구간의 경계값들이 저장되어 있음
 - $counte : 구간별 빈도수가 저장
@@ -366,6 +372,7 @@ $out
       radius=2)
 > par(mfrow=c(1,1), mar=c(5,4,4,2)+.1)      # 화면 분할 취초
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236197149-cee6e222-c533-489e-92b0-9b5990c84dfa.png">
 
 ## [2] 그래프 파일에 저장
 - Plot Zoom 팝업 창 위에서 마우스 우클릭 -> [Copy Image] -> R 그래프 복사
@@ -381,6 +388,8 @@ $out
 > ds
 > pie(ds, main-='선호 계절', radius=1)                                                                                # 원그래프 작성
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236197447-802c432a-a93e-44b3-9196-30418f698687.png">
+
 - 원그래프 작성하는 함수 -> pie()
 - radius : -1~1 사이의 값으로 원의 크기와 데이터를 표시하는 방향을 조절 (보통 1)
 
@@ -399,6 +408,7 @@ $out
         radius=1.5,                                 # 파이의 크기
         col=c('brown','green','red','yellow')       # 파이의 색 지정
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236197663-f32091c9-4013-47c6-b8a4-e331755c6dba.png">
 
 # 선그래프
 - 연도별 인구 증가 추이와 같이 시간의 변화에 따라 수집된 데이터를 시각화하는데 주로 사용
