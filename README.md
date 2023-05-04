@@ -162,7 +162,7 @@ $out
 > ds                                           # 도수분포표 내용 확인
 > barplot(ds, main='favorite season')          # 막대그래프 작성
 ```
-<img src="https://user-images.githubusercontent.com/100751115/236193834-c1d5bb9e-c142-4b88-a5c6-8b5d099bb856.png" width=350>
+<img src="https://user-images.githubusercontent.com/100751115/236193834-c1d5bb9e-c142-4b88-a5c6-8b5d099bb856.png">
 
 - ds : 그래프로 표현할 도수분포효를 지정한다
 - main = 'favorite seaon' : 막대그래프 상단의 그래프 제목을 지정한다
@@ -180,6 +180,8 @@ $out
 > barplot(ds, main='favorite seaon', 
           col=rainbow(4))                                # 레인보우 팔레트에서 4개의 색을 선택
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236194302-21e45aad-182f-4686-ad98-6a8fd066c6b1.png">
+
 - col : 막대의 색을 지정하는 매개변수
 - 색을 지정하는 방법
 (1) 'blue', 'red', 'yellow'와 같이 색의 이름을 지정한다
@@ -194,6 +196,8 @@ $out
           xlab='계절',          # x축 설명
           ylab='빈도수')          # y축 설명
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236194491-6231c123-7c15-4229-8e92-12be4ef4cbd4.png">
+
 - x축 설명 지정 매개변수 -> xlab
 - y축 설명 지정 매개변수 -> ylab
 
@@ -203,6 +207,8 @@ $out
           col='green',          # 막대의 색을 지정
           horiz=TRUE)          # 수평 방향 출력
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236194631-3a662d8b-1f79-40e1-bd52-b86ae3cb41a8.png">
+
 - 그래프를 수평 방향으로 출력하도록 지정하는 매개변수 -> horiz
 - horiz=TRUE : 수평방향
 - horiz의 기본값 : 수직방향(FALSE)
@@ -214,6 +220,8 @@ $out
           names=c('FA','SP','SU','WI'),          # 그룹 이름을 바꾸어 출력
           las=2)                                # 그룹 이름을 수직 방향으로
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236194765-fe569282-8f1c-47be-bd66-615a13e710c5.png">
+
 - names() : 그룹의 이름을 다른 것으로 바꾸어 출력할 때 사용
 - las : 그룹 이름의 출력 방향을 결정하는 역할
 - las값에 따른 출력 방향
@@ -229,37 +237,43 @@ $out
 > age.B <- c(17540, 29701, 36209, 33947, 24487)
 > age.C <-c(991, 2195, 5366, 12980, 19007)
 
-> ds <- rebind(age.A, age.B, age.C)
+> ds <- rbind(age.A, age.B, age.C)
 > colnames(ds) <- c('1970', '1990', '2010', '2030', '2050')
 > ds
 
 # 그래프 작성
-> barplot(ds, main='인구 추정'
+> barplot(ds, main='인구 추정',
         col=c('green', 'blue', 'yellow'),          # 연령대별로 색 다르게 지정
         beside=TRUE)                              # 연령대를 각각 막대로 표현
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236195391-b527d2a4-40dc-496e-a9a0-2185094ed503.png">
+
 - 그룹별 색 지정 시 색의 순서 : 그래프의 막대를 기준으로 아래에서 위쪽 방향
 - beside : 연령대별 인구수를 하나의 막대로 모아서 표시할지, 각각 표시할지를 지정하기 위한 매개변수
 
 ## [3] 막대그래프 범례
 ### 1. 막대그래프에 범례 추가
 ```
-> barplot(ds, main='인구 추정'
-        col=c('green', 'blue', 'yellow')          
+> barplot(ds, main='인구 추정',
+        col=c('green', 'blue', 'yellow'),          
         beside=TRUE,                              
         legend.text=T)                            # 막대그래프에 범례 추가
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236195662-3316d4fa-e75e-4ee3-891f-3dfa5ea23690.png">
+
 - legend.text=T : 그래프 위에 범례를 표시하라는 의미
 
 ### 2. 범례를 그래프 밖에 표시하기
 ```
 > par(mfrow=c(1, 1), mar=c(5, 5, 5, 7))          # 그래프 윈도우 설정
-> barplot(ds, main='인구 추정'
-        col=c('green', 'blue', 'yellow')          
+> barplot(ds, main='인구 추정',
+        col=c('green', 'blue', 'yellow'),          
         beside=TRUE ,                             
         legend.text=T,                            
         args.legend = list(x='topright', bty='n', inset=c(-0.25,0)))          # 범례 위치 설정
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236195972-12de1ce7-64f2-4488-b0c9-17a64d9c346f.png">
+
 (1) par() : 그래프를 표시할 창에 대해 설정하는 역할
 (2) mfrow=c(1,1) : 그래프를 출력할 창을 어떻게 분할할지를 지정하는데, 여기서 c(1,1)은 창을 분할하지 않음을 의미
 (3) mar=c(5, 5, 5, 7)
