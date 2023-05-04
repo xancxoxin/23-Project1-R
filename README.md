@@ -162,7 +162,7 @@ $out
 > ds                                           # 도수분포표 내용 확인
 > barplot(ds, main='favorite season')          # 막대그래프 작성
 ```
-<img src="https://user-images.githubusercontent.com/100751115/236193294-0e948156-24fb-4b32-a016-e4fab2a21f53.png" width=350>
+<img src="https://user-images.githubusercontent.com/100751115/236193834-c1d5bb9e-c142-4b88-a5c6-8b5d099bb856.png" width=350>
 
 - ds : 그래프로 표현할 도수분포효를 지정한다
 - main = 'favorite seaon' : 막대그래프 상단의 그래프 제목을 지정한다
