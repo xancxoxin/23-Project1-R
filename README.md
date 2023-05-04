@@ -1,29 +1,253 @@
 
 # 602377101 강승희
+<h2> 2023-05-04 </h2>
+
+---
 <h2> 2023-04-27 </h2>
 
 # 막대그래프
 ## [1] 막대그래프 작성의 기초
 - 막대그래프 : 그래프별로 집계된 데이터를 표현하는 도구
 - 데이터 시각화 : 데이터가 포함하고 있는 정보를 이해하기 쉽게 표현하는 과정
+### 1. 도수분포표 계산하기
+```
+> favorite <- c('WINTER','SUMMER','SPRING','SUMMER','SUMMER','FALL','FALL','SUMMER','SPRING','SPRING')          # 데이터 입력
+> favorite          # favorite의 내용 출력
+> table(favorite)          # 도수분포 계산
+```
+- table() : 벡터에 저장되니 범주형 데이터에 대해 데이터값이 종류별로 몇 개인지 계산하는 함수
+
+### 2. 막대그래프 작성하기
+```
+> ds <- table(favorite)                        # 도수분포표 저장
+> ds                                           # 도수분포표 내용 확인
+> barplot(ds, main='favorite season')          # 막대그래프 작성
+```
+- ds : 그래프로 표현할 도수분포효를 지정한다
+- main = 'favorite seaon' : 막대그래프 상단의 그래프 제목을 지정한다
+- barplot()
+(1) 막대그래프를 작성하는 함수
+(2) 2개의 매개변수 외에도 다양한 매개변수를 가질 수 있음
+(3) 매개변수값에 따라 막대 색상을 다르게 하거나 x축, y축의 레이블을 지정할 수 있음
+
+### 3. 막대그래프 색 지정하기
+```
+> barplot(ds, main='favorite seaon', 
+          col='blue')                                    # 막대의 전채 색 지정
+> barplot(ds, main='favorite seaon', 
+          col=c('blue','red','green','yellow'))          # 막대의 색을 각각 지정
+> barplot(ds, main='favorite seaon', 
+          col=rainbow(4))                                # 레인보우 팔레트에서 4개의 색을 선택
+```
+- col : 막대의 색을 지정하는 매개변수
+- 색을 지정하는 방법
+(1) 'blue', 'red', 'yellow'와 같이 색의 이름을 지정한다
+(2) '#0000FF'와 같이 색상별로 지정된 코드를 이용한다
+(3) rgb(0,0,0,255, maxColorValue=255)와 같이 빨강, 초록, 파랑, 투명도의 조합으로 색을 만들어서 사용한다
+- 팔레트 사용을 위한 함수 : rainbow(), heat.colors(), terrain.colors(), topo.colors(), cm.colors() 대표적
+
+### 4. x축, y축에 설명 붙이기
+```
+> barplot(ds, main='favorite seaon', 
+          col='green',          # 막대의 색을 지정
+          xlab='계절',          # x축 설명
+          ylab='빈도수')          # y축 설명
+```
+- x축 설명 지정 매개변수 -> xlab
+- y축 설명 지정 매개변수 -> ylab
+
+### 5. 그래프 막대를 수평 방향으로 출력하기
+```
+> barplot(ds, main='favorite seaon', 
+          col='green',          # 막대의 색을 지정
+          horiz=TRUE)          # 수평 방향 출력
+```
+- 그래프를 수평 방향으로 출력하도록 지정하는 매개변수 -> horiz
+- horiz=TRUE : 수평방향
+- horiz의 기본값 : 수직방향(FALSE)
+
+### 6. x축의 그룹 이름 바꾸기
+```
+> barplot(ds, main='favorite seaon', 
+          col='green',                          # 막대의 색을 지정
+          names=c('FA','SP','SU','WI'),          # 그룹 이름을 바꾸어 출력
+          las=2)                                # 그룹 이름을 수직 방향으로
+```
+- names() : 그룹의 이름을 다른 것으로 바꾸어 출력할 때 사용
+- las : 그룹 이름의 출력 방향을 결정하는 역할
+- las값에 따른 출력 방향
+(1) 0 : 축 방향(기본값)
+(2) 1 : 수평 방향(축 방향과 상관없음)
+(3) 2 : 축을 기준으로 수직 방향
+(4) 3 : 수직 방향(축 방향과 상관없음)
 
 ## [2] 중접 그룹의 막대그래프
+```
+# 데이터 입력
+> age.A  <- c(13709, 10974, 7979, 5000, 4250)
+> age.B <- c(17540, 29701, 36209, 33947, 24487)
+> age.C <-c(991, 2195, 5366, 12980, 19007)
 
-## [3] 막대그래프에 범례 추가
+> ds <- rebind(age.A, age.B, age.C)
+> colnames(ds) <- c('1970', '1990', '2010', '2030', '2050')
+> ds
+
+# 그래프 작성
+> barplot(ds, main='인구 추정'
+        col=c('green', 'blue', 'yellow'),          # 연령대별로 색 다르게 지정
+        beside=TRUE)                              # 연령대를 각각 막대로 표현
+```
+- 그룹별 색 지정 시 색의 순서 : 그래프의 막대를 기준으로 아래에서 위쪽 방향
+- beside : 연령대별 인구수를 하나의 막대로 모아서 표시할지, 각각 표시할지를 지정하기 위한 매개변수
+
+## [3] 막대그래프 범례
+### 1. 막대그래프에 범례 추가
+```
+> barplot(ds, main='인구 추정'
+        col=c('green', 'blue', 'yellow')          
+        beside=TRUE,                              
+        legend.text=T)                            # 막대그래프에 범례 추가
+```
+- legend.text=T : 그래프 위에 범례를 표시하라는 의미
+
+### 2. 범례를 그래프 밖에 표시하기
+```
+> par(mfrow=c(1, 1), mar=c(5, 5, 5, 7))          # 그래프 윈도우 설정
+> barplot(ds, main='인구 추정'
+        col=c('green', 'blue', 'yellow')          
+        beside=TRUE ,                             
+        legend.text=T,                            
+        args.legend = list(x='topright', bty='n', inset=c(-0.25,0)))          # 범례 위치 설정
+```
+(1) par() : 그래프를 표시할 창에 대해 설정하는 역할
+(2) mfrow=c(1,1) : 그래프를 출력할 창을 어떻게 분할할지를 지정하는데, 여기서 c(1,1)은 창을 분할하지 않음을 의미
+(3) mar=c(5, 5, 5, 7)
+- 그래프를 출력할 창과 그래프 출력 영역 밖의 여유 공간을 지정한다
+- c(bottom, left, top, right)의 순서로 숫자를 지정한다
+- 숫자가 커질수록 여유 공간이 넓어지며, 기본값은 c(5.1, 4.1, 4.1, 2.1)이다
+(4) args.legend 
+- barplot()에서 범례에 관한 사항을 지정하는데 사용
+- 여러 개의 사항을 list() 함수로 묶어서 지정할 수 있음
+- x='topright' : 범례를 출력할 기본 위치를 지정하는 데, 'topright'은 그래프 출력에서 위쪽에서 오른쪽을 의미
+- bty='o' : 범례가 표시되는 영역에 테두리선을 표시할지의 여부를 지정한다 'o'은 테두리 선을 표시하고, 'n'은 테두리선을 표시하지 않는다
+- inset=c(-0.25, 0) : 범례를 x축과 y축 방향으로 얼마나 이동시키지를 지정한다. -1~1 사이의 값을 지정한다(%를 의미)
+
+### 3. 범례의 내용 바꾸기
+```
+> par(mfrow=c(1, 1), mar=c(5, 5, 5, 7))          # 그래프 윈도우 설정
+> barplot(ds, main='인구 추정'
+        col=c('green', 'blue', 'yellow')
+        beside=TRUE ,
+        legend.text=c('0~14세', '15~64세', '65세 이상'),                            # 범례 내용 바꾸기
+        args.legend = list(x='topright', bty='n', inset=c(-0.25,0)))
+> par(mfrow=c(1, 1), mar=c(5, 4, 4, 2)+0.1)          # 그래프창 설정 해제
+```
 
 # 히스토그램
 - 개념 : 외관상 막대그래프와 비슷한 그래프로, 그룹이 명시적으로 존재하지 않는 수치형 자료의 분포를 시각화할 때 사용함
 - R에서는 hist() 함수를 이용하여 히스토그램을 작성함
+- 관측값들이 어느 구간에 어느 빈도로 분포하는지를 쉽게 파악할 수 있도록 해줌
 
-## [1] 
+### [1] 히스토그램 작성하기
+```
+> head(cars)
+> dist <- cars[,2]                       # 자동차 제동거리
+> dist
+> hist(dist,                             # data
+       main='Histogram for 제동거리',    # 제목
+       xlab='제동거리',                  # x축 레이블
+       ylab='빈도수',                    # y축 레이블
+       border='blue',                    # 막대 테두리색
+       col='green',                      # 막대 색
+       las=2,                            # x축 글씨 방향(0~3)
+       breaks=5)                         # 막대 개수 조절
+```
+- border='blue' : 막대의 테두리 색을 지정한다
+- breaks=5 : 데이터 내 구간을 몇 개로 나눌지를 지정하며, 값이 커질수록 막대의 개수도 늘어난다
+
+#### 히스토그램 vs 막대그래프
+- 막대 사이에 간격이 있으면 -> 막대그래프
+- 막대 사이에 간격 없이 막대들이 붙어 있으면 -> 히스토그램
+- 막대 그래프에서는 막대의 면적이 의미가 X
+- 히스토그램에서는 막대의 면적이 의미 O
+
+## [2] 구간별 빈도수를 도수분포표 형태로 알아보기
+```
+> result <- hist(dist,                             # data
+                 main='Histogram for 제동거리'     # 제목
+                 breaks=5)                         # 막대 개수 조절
+> result
+> freq <- result$counts                            # 구간별 빈도수 저장
+> names(freq) <- result$breaks[-1]                 # 구간값을 이름으로 지정
+> freq                                             # 구간별 빈도수 출력
+```
+(1) result : 리스트 형대의 자료구조로 되어 있고 여러 값들을 포함하고 있음
+- $breaks : 히스토그램을 작성하기 위한 구간의 경계값들이 저장되어 있음
+- $counte : 구간별 빈도수가 저장
 
 # 다중그래프
+- 그래프 출력창을 가상으로 몇 개의 화면으로 분할한 뒤 각각의 분할된 화면에 그래프들을 출력하는 것
+
+## [1] 4개 그래프 한 화면에시 표시
+```
+> par(mfrow=c(2,2), mar=c(3,3,4,2))          # 화면 분할(2x2)
+
+> hist(irirs$Sepal.Length,                   # 그래프 1
+       main='Sepal.Length',
+       col='orange')
+       
+> barplot(table(mtcars$cyl),                 # 그래프 2
+          main='mtcars',
+          col=c('red','green','blue'))
+          
+> barplot(table(mtcars$gear),                # 그래프 3
+          main='mtcars',
+          col=rainbow(3),
+          horiz=TRUE)
+          
+> pie(table(mtcars$cyl),                     # 그래프 4
+      main='mtcars',
+      cpl=topo.colors(3),
+      radius=2)
+> par(mfrow=c(1,1), mar=c(5,4,4,2)+.1)      # 화면 분할 취초
+```
+
+## [2] 그래프 파일에 저장
+- Plot Zoom 팝업 창 위에서 마우스 우클릭 -> [Copy Image] -> R 그래프 복사
+- [Save image as..] : 파일로 저장 (확장자 : .png/.jpg)
+
 # 원그래프
+- 하나의 원 안에 데이터값이 차지하는 비율을 넓이로 나타낸 그래프
+
+## [1] 원 그래프 작성하기
+```
+> favorite <- c('SWINTER', 'SUMMER', 'SPRING', 'SUMMER', 'SUMMER', 'FALL', 'FALL', 'SUMMER', 'SPRING', 'SPRING')      # 데이터 입력
+> ds <- table(favorite)                                                                                               # 도수분포 계산
+> ds
+> pie(ds, main-='선호 계절', radius=1)                                                                                # 원그래프 작성
+```
+- 원그래프 작성하는 함수 -> pie()
+- radius : -1~1 사이의 값으로 원의 크기와 데이터를 표시하는 방향을 조절 (보통 1)
+
+## [2] 파이 조각의 색 지정하기
+- 막대그래프와 동일
+
+## [3] 3차원 원그래프 작성하기
+```
+> install.packages('plotrix')                       # pie3D 함수 사용하기 위한 패키지 설치
+
+> library(plotrix)
+> pie3D(ds, main='선호계절',
+        labels=names(ds),                           # 파이별 레이블 지정
+        labelcex=1.0,                               # 레이블의 폰트 크기
+        explode=0.1,                                # 파이 간 간격
+        radius=1.5,                                 # 파이의 크기
+        col=c('brown','green','red','yellow')       # 파이의 색 지정
+```
+
 # 선그래프
 - 연도별 인구 증가 추이와 같이 시간의 변화에 따라 수집된 데이터를 시각화하는데 주로 사용
 - x축을 시간축으로 하여 선그래프를 그리면 시간 변화에 따른 증감 추이를 알 수 있음
-
-9-4전까지
 ---
 
 <h2> 2023-04-13 </h2>
