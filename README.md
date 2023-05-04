@@ -112,7 +112,7 @@ $out
        col='red',                # point의 color
        pch=19)                   # point의 종류
 ```
-<img src= "https://user-images.githubusercontent.com/100751115/236189388-a7d5cb87-168e-4076-9cfd-db3e72eb4a0c.png" width='350'>
+<img src= "https://user-images.githubusercontent.com/100751115/236189388-a7d5cb87-168e-4076-9cfd-db3e72eb4a0c.png" width=350>
 
 ## [2] 여러 변수들 간의 산점도 => 다중 산점도
 - plot()함수는 변수가 2개 이상인 데이터에 대해 변수를 2개씩 짝지어 산점도 작성
@@ -125,8 +125,22 @@ $out
 > plot(target,
        main='Multi plots')                # 대상 데이터
 ```
-<img src="https://user-images.githubusercontent.com/100751115/236188240-9ea9edbd-685c-4225-b668-de4ca37419bc.png" width="350">
- 
+<img src="https://user-images.githubusercontent.com/100751115/236188240-9ea9edbd-685c-4225-b668-de4ca37419bc.png" width=350>
+
+## [3] 그룹 정보가 2개 변수의 산점도
+```
+> iris.2 <- iris[,3:4]                      # 데이터 준비
+> levels(iris$Species)                      # 그룹 확인
+> group <- as.numeric(iris$Species)         # 점의 모양과 색
+> group                                     # group 내용 출력
+> color <- c('red','green','blue')          # 점의 컬러
+> plot(iris.2,
+       main='Iris plot',
+       pch=c(group),
+       col=color[group])
+```
+<img src="https://user-images.githubusercontent.com/100751115/236192629-af7ed5c4-dd20-4ec2-8b71-67e9251d778f.png" width=350>
+
 ---
 <h2> 2023-04-27 </h2>
 
@@ -148,6 +162,8 @@ $out
 > ds                                           # 도수분포표 내용 확인
 > barplot(ds, main='favorite season')          # 막대그래프 작성
 ```
+<img src="https://user-images.githubusercontent.com/100751115/236193294-0e948156-24fb-4b32-a016-e4fab2a21f53.png" width=350>
+
 - ds : 그래프로 표현할 도수분포효를 지정한다
 - main = 'favorite seaon' : 막대그래프 상단의 그래프 제목을 지정한다
 - barplot()
