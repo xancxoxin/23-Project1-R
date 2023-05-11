@@ -60,7 +60,131 @@ head(st)
 (2) 2개의 변수가 아닌 3개 이상의 변수 데이터를 입력하면 다중 산점도와 비슷한 형태의 결과가 나타남
 (3) 테이블의 가로와 세로에 변수를 배치하고, 가로의 변수와 세로의 변수가 만나는 지점에 두 변수의 상관계수값을 표시함
 (4) 대각선은 도잉ㄹ한 변수끼리의 상관계수가 표시되므로 값은 항상 1
--
+
+# 결측값
+(1) 데이터 전처리
+- 확보한 데이터를 정제하고 가공하여 분석에 적합한 형태로 만드는 과정
+- 현실에서는 잘 정리된 데이터셋을 바로 얻는 경우가 많지 않음
+- 데이터 전처리는 전체 분석 과정에서 오랜 시간을 차지
+
+(2) 결측값의 처리
+- 결측값은 데이터 수집, 저장 과정에서 값을 얻지 못하는 경우 발생(NA로 표현)
+- 결측값이 섞여 있는 데이터셋은 분석할 때 문제를 일으킴  
+ex) 합, 평균 계산 시
+- 결측값은 2가지 방법으로 처리
+1. 결측값을 제거하거나 제외한 후 분석
+2. 결측값을 추정하여 적당한 값으로 치환한 후 분석
+
+## [1] 벡터의 결측값
+```
+> z <- c(1,2,3,NA,5,NA,8)     # 결측값이 포함된 벡터 z
+> sum(z)                      # 정상 계산이 되지 않음
+> is.na(z)                    # NA 여부 확인
+sum(is.naa(z))                # NA의 개수 확인
+sum(z, na.rm=TRUE)            # NA를 제외하고 합계를 계산
+```
+
+- NA를 다른 값으로 대체하는 방버과 NA를 제거하는 방법
+```
+> z1 <- c(1,2,3,NA,5,NA,8)            # 결측값이 포함된 벡터 z1
+> z2 <- x(5,8,1,NA,3,NA,7)            # 결측값이 포함된 벡터 z2
+> z1[is.na(z1)] <- 0                  # NA를 0로 치환
+> z1
+> z3 <- as.vector(na.omit(z2))        # NA를 제거하고 새로운 벡터 생성
+> z3
+```
+
+## [2] 매트릭스와 데이터프레임의 결측값
+- NA가 포함된 데이터프레임 x를 생성
+```
+# NA를 포함하는 test 데이터 생성
+> x <- iris
+> x[1,2]<- NA; x[1,3]<- NA
+> x[2,3]<- NA; x[3,4]<- NA
+> head(x)
+```
+### (1) 열 별로 결측값이 몇 개인지를 알아보는 명령문
+```
+# for를 이용한 방법
+> for(i in 1:ncol(x)) {
+      this.na <- is.na(x[,i])
+      cat(colnames(x[i], '\t', sum(this.na), '\n'))
+}
+
+# apply를 이요한 방법
+> col_na <- function(y) {
+      return(sum(is.na(y)))
+}
+
+na_count <- apply(x, 2, FUN=col_na)
+na_count 
+```
+- 실행 결과
+```
+# for를 이용한 방법
+# is.na() 함수를 통해 각 열별로 NA의 개수를 파악한 뒤 
+# cat() 함수를 통해 열이름과 NA의 개수를 출력
+
+Sepal.Length 	 0 
+Sepal.Width 	 1 
+Petal.Length 	 2 
+Petal.Width 	 1 
+Species 	 0
+
+# apply를 이용한 방법
+# 열별로 NA의 값을 파악하는 col_na() 함수를 정의하고, apply() 함수에서 각 열별로 col_na() 함수로 적용하여 결과를 얻음
+
+Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+           0            1            2            1            0 
+```
+
+### (2) 행 별로 NA의 개수 파악하는 예
+```
+rowSum(is.na(x))                # 행별 NA 개수
+sum(rowSums(is.na(x))>0)        # NA가 포함된 행의 개수
+sum(is.na(x))                   # 데이터셋 전체에서 NA 개수
+```
+- 실행결과
+```
+> rowSums(is.na(x))                # 행별 NA 개수
+  [1] 2 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ [34] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ [67] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+[100] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+[133] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+> sum(rowSums(is.na(x))>0)        # NA가 포함된 행의 개수
+[1] 3
+> sum(is.na(x))
+[1] 4
+```
+
+### (3) NA를 포함한 행은 제외하고 새로운 데이터셋을 만들기
+```
+> head(x)                       
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1          NA           NA         0.2  setosa
+2          4.9         3.0           NA         0.2  setosa
+3          4.7         3.2          1.3          NA  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+> x[!complete.cases(x),]        # NA가 포함된 행들을 나타냄
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1          NA           NA         0.2  setosa
+2          4.9         3.0           NA         0.2  setosa
+3          4.7         3.2          1.3          NA  setosa
+> y <- x[complete.cases(x),]    # NA가 포함된 행들을 제거
+> head(y)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+7          4.6         3.4          1.4         0.3  setosa
+8          5.0         3.4          1.5         0.2  setosa
+9          4.4         2.9          1.4         0.2  setosa
+```
+- 어떤 데이터셋에서 NA를 포함하지 않은 완전한 행들은 찾아줌 => 완전한 행들의 인덱스 값을 찾아줌
+
 ---
 <h2> 2023-05-04 </h2>
 
@@ -1024,7 +1148,8 @@ cmd 창에서 다음과 같이 입력
 
 # 프로젝트 폴더 git으로 초기화
 - 'source control' -> 'Initialize Repository' 버튼 클릭
-- [시험볼 때 이걸로 하기] 'source control' -> 'pulblic to github' 선택 후 public 주소 선택 끝
+- [시험볼 때 README.md 파일 깃허브 연동하기]  
+'source control' -> 'pulblic to github' 선택 후 public 주소 선택 끝
 
 # commit 방법
 - 'source control' -> ‘✔commit’ 버튼 클릭
@@ -1036,5 +1161,7 @@ cmd 창에서 다음과 같이 입력
 # R 언어
 - 비교적 최근에 개발된 언어(1993년도 개발)
 - 통계계산과 그래픽을 위한 프로그래밍 언어
+- [시험볼 때 패키지 설치]  
+install.package("패키지명")
 
 ---
