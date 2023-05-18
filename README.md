@@ -141,7 +141,8 @@ black white
           type='value',                         # 타일 컬러링 방법
           title="World's GNI")                  # 나무지도 제목
 ```
-<imh src=https://github.com/xancxoxin/23-Project1-R/assets/100751115/148e1afb-442c-4a81-a2a0-bd747378a69c>
+<img src=https://github.com/xancxoxin/23-Project1-R/assets/100751115/148e1afb-442c-4a81-a2a0-bd747378a69c>
+
 ---
 <h2> 2023-05-11 </h2>
 
