@@ -1,5 +1,148 @@
 
 # 602377101 강승희
+<h2> 2023-05-18 </h2>
+
+# 정렬
+- 주어진 기준에 따라 데이터를 크기순으로 재배열하는 과정
+- 숫자의 경우 : 숫자의 크기에 따라 정렬이 가능
+- 문자열의 경우 : 알파벳순, 또는 가나다순으로 정렬이 가능
+
+## [1] 벡터의 정렬
+### 1. sort() 함수 : 값의 크기에 따라 값들을 정렬하는 함수
+```
+> v1 <- c(1,7,6,8,4,2,3)
+> v1 <- sort(v1)                    # 오름차순
+> v1
+[1] 1 2 3 4 6 7 8
+> v2 <- sort(v1, devresting=T)      # 내림차순
+> v2
+[1] 8 7 6 4 3 2 1
+```
+- 정렬은 기본적으로 오름차순
+- 내림차순 -> sort() 함수의 매개변수 decreasing을 T로 설정
+
+### 2. order() 함수 : 값의 크기에 따라 값들의 인덱스를 정렬하는 함수
+```
+> name <- c('정대일', '강재구','신현석','홍길동')
+> order(name)                     # 오름차순
+[1] 2 3 1 4
+> order(name, decreasing=T)       # 내림차순
+[1] 4 1 3 2
+
+> idx <- order(name)              
+> name[idx]                       # 오름차순 정렬
+[1] "강재구" "신현석" "정대일" "홍길동"
+```
+
+## [2] 매트릭스와 데이터프레임의 정렬
+- 특정 열의 값들을 기준으로 행을 재배열하는 방법
+
+# 샘플링과 조합
+## [1] 샘플링
+- 주어진 값들에서 임의의 개수만큼 값을 추출하는 작업
+- 여러번 값을 추출할 때,
+1. 비복원 추출 : 한번 뽑은 값은 제외한 뒤 새로운 값을 추출하는 방식
+```
+> x <- 1:100
+> y <- sample(x, size=10, replace=FALSE)        # 비복원 추출
+> y
+[1] 40 54 65 72 63 94 28 92 93 77
+```
+- size : 추출할 값의 개수를 지정하는 매개변수
+- replace=FALSE : 비복원 추출 의미  
+(복원 추출을 원하면 replace=TRUE)
+2. 복원 추출 : 뽑았던 값을 다시 포함시켜 새로운 값을 추출하는 방식
+- 샘플링이 필요한 때  
+-> 데이터셋이 너무 커 분석에 시간이 많이 걸리는 경우, 일부의 데이터만 추출하여 대략의 결과를 미리 확인
+
+### 임의의 추출을 하되 다음번에 다시 추출해도 동일한 결과가 나오도록 하는 경우
+-> set.seed() 함수 사용
+```
+> sample(1:20, size=5)
+[1] 19 11  6  9  3
+> sample(1:20, size=5)
+[1] 20 13  3 16  6
+> sample(1:20, size=5)
+[1] 14  6  4  8  7
+> set.seed(100)
+> sample(1:20, size=5)
+[1] 10  6 16 14 12
+> set.seed(100)
+> sample(1:20, size=5)
+[1] 10  6 16 14 12
+> sample(1:20, size=5)
+[1]  6  4 20  2  7
+```
+
+## [2] 조합
+- 글자 그대로 주어진 데이터값 중에서 몇 개씩 짝을 지어 추출하는 작업
+- combn() 함수 사용
+```
+> combn(1:5,3)                      # 1~5에서 3개를 뽑는 조합
+ [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+[1,]    1    1    1    1    1    1    2    2    2     3
+[2,]    2    2    2    3    3    4    3    3    4     4
+[3,]    3    4    5    4    5    5    4    5    5     5
+
+> x <- c("red","green","blue","black","white")    
+> com <- combn(x,2)                 # x의 원소를 2개씩 뽑는 조합
+
+> com 
+      [,1]    [,2]   [,3]    [,4]    [,5]    [,6]    [,7]    [,8]   [,9]    [,10] 
+[1,] "red"   "red"  "red"   "red"   "green" "green" "green" "blue" "blue"  "black"
+[2,] "green" "blue" "black" "white" "blue"  "black" "white" "black""white" "white"
+      
+> for(i in 1:ncol(com)) {           # 조합 출력
+      cat(com[,i],"\n")
+}
+red green 
+red blue 
+red black 
+red white 
+green blue 
+green black 
+green white 
+blue black 
+blue white 
+black white
+```
+
+# 데이터 집계
+- 집계 : 매트릭스나 데이터프레임과 같은 2차원 데이터는 데이터의 그룹에 대해서 합계나 평균을 계산하는 작업
+- aggregate() 함수 사용
+## [1] 데이터 집계 예
+```
+# 1. 품종별 꽃잎 꽃받침의 폭과 길이의 평균
+> agg <- aggregate(iris[,-5], by=list(iris$Species),
+                    FUN=mean)               
+> agg
+  Group.1 Sepal.Length Sepal.Width Petal.Length Petal.Width
+1     setosa        5.006       3.428        1.462       0.246
+2 versicolor        5.936       2.770        4.260       1.326
+3  virginica        6.588       2.974        5.552       2.026
+```
+- iris[,-5] : 집계 작업을 수행할 대상 데이터 셋을 의미
+- by=list(iris$Species) : 집계 작업의 기준을 품종 열의 값임을 의미
+- FUN=mean : 집계 작업의 내용이 평균 계산임을 의미
+- Group.1을 품종이라고 하고 싶으면 by=list(품종=iris$Species) 수정
+
+# 나무지도
+- 사각 타일의 형태로 표현되는데, 데이터의 정보를 타일의 크기와 색깔로 나타낼 수 있음
+- 타일들은 계층 구조로 되어있어서 데이터에 존재하는 계층 구조까지 표현 가능
+```
+> install.packages('treemap')     # 패키지 설치
+> library(treemap)                # treemap 패키지 불러오기
+> data(GNI2014)                   # 데이터 불러오기
+> head(GNI2014)                   # 데이터 내용 보기
+> treemap(GNI2014,
+          index=c('continent', 'iso3'),         # 계층 구조 설정(대륙-국가)
+          vSize='population',                   # 타일의 크기
+          vColor='GNI',                         # 타일의 컬러
+          type='value',                         # 타일 컬러링 방법
+          title="World's GNI")                  # 나무지도 제목
+```
+<imh src=https://github.com/xancxoxin/23-Project1-R/assets/100751115/148e1afb-442c-4a81-a2a0-bd747378a69c>
+---
 <h2> 2023-05-11 </h2>
 
 # 다중변수 데이터
